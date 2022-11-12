@@ -58,7 +58,35 @@ function mouseReleased() {
     picture.prevCoord = null;
 }
 
+function mouseDragged() {
+    // save the coordinates when user starts to draw
+    if (picture.prevCoord === null) {
+        picture.prevCoord = {
+            x: mouseX,
+            y: mouseY,
+        };
+    }
 
+    let data = {
+        color: UI.brush.checked ? UI.brushClrPicker.value : null,
+        width: widthSlider.value,
+        start: {
+            x: picture.prevCoord.x,
+            y: picture.prevCoord.y,
+        },
+        end: {
+            x: mouseX,
+            y: mouseY,
+        },
+    };
+
+    socket.emit('draw', data);
+
+    picture.prevCoord = {
+        x: mouseX,
+        y: mouseY,
+    };
+}
 
 function newDrawing(data) {
     if (data.color === null) {

@@ -155,7 +155,7 @@ function roomProcess(socket, data) {
     return roomId;
 }
 
-class ConsoleLog {
+class ConsoleLog {git
     static userJoin(socket, roomId) {
         console.log(
             socket.id,
